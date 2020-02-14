@@ -25,3 +25,29 @@ ninja
 
 That will build two executables: `ut` and `app`. The `ut` binary runs the tests,
 while the `app` binary times the implementation.
+
+
+### Improvements
+
+- Cached ```halfsize``` to avoid repeated calls to ```/2``` or shift. IMprovement neglibable.
+- Big improvement using introselect instead of introsort (only continue the recursion for what we need - don't sort everything to save time)
+
+With these two optimizations, unit tests still pass and runtime of app goes from 1650 ms to 513 ms on my machine - over 3 times faster.
+
+I cannot see any further optimization (without breaking unit tests) since quickselect on average is O(n) compared to quicksort which is O(n logn).
+
+To compare the difference use:
+```bash
+# without improvements
+cmake -DSLOW_WAY=ON ..
+make
+./app
+```
+
+and 
+```bash
+# with improvements
+cmake -DSLOW_WAY=OFF ..
+make
+./app
+```
