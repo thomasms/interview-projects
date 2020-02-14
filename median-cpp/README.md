@@ -29,7 +29,7 @@ while the `app` binary times the implementation.
 
 ### Improvements
 
-- Cached ```halfsize``` to avoid repeated calls to ```/2``` or shift. IMprovement neglibable.
+- Cached ```halfsize``` to avoid repeated calls to ```/2``` or shift. Improvement negligible.
 - Big improvement using introselect instead of introsort (only continue the recursion for what we need - don't sort everything to save time)
 
 With these two optimizations, unit tests still pass and runtime of app goes from 1650 ms to 513 ms on my machine - over 3 times faster.
